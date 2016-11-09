@@ -1,0 +1,15 @@
+<div class="music-view">
+	<div class="music-title">
+		<h1>{{ music.title_formated }}</h1>
+	</div>
+	<div id="audioplayer-{{ music.key.id }}"><a href="{{ src }}" title="{{ music.title_formated }}" alt="{{ music.title_formated }}">{{ music.title_trimmed }}</a></div>
+<audio src="{{ src }}" preload="none"></audio> 
+	<div class="music-content">
+		{{ music.content_formated|safe }}
+	</div>
+	<div id="music-fb-like">
+		<div id="music-fb-like-inner">
+			<fb:like href="http://www.{{ settings.site_domain }}{{ like_url }}" layout="button_count" show_faces="false" width="100" colorscheme="dark">
+		</div>
+	</div>
+</div>

@@ -1,0 +1,11 @@
+<div class="menus">
+	{% for menu in menus %}
+	<ul class="{{ menu.position }}-menu">
+		{% for item in menu.items %}
+		<li>
+			<a href="{{ item.path }}" title="{{ item.description }}" {% if item.active %} class="active" {% endif %} >{{ item.name }}</a>
+		</li>
+		{% endfor %}
+	</ul>
+	{% endfor %}
+</div>

@@ -1,0 +1,50 @@
+<div class="user-management-form">
+	<form action="{{ submit_url }}" method="POST" accept-charset="UTF-8">
+		<table class="users-grid">
+			<tr>
+				<td>
+					{{ settings.user_management_form_label_uid }}
+				</td>
+				<td>
+					{{ settings.user_management_form_label_email }}
+				</td>
+				<td>
+					{{ settings.user_management_form_label_registered }}
+				</td>
+				<td>
+					{{ settings.user_management_form_label_last_access }}
+				</td>
+				<td>
+					{{ settings.user_management_form_label_last_ip_address }}
+				</td>
+				<td>
+					{{ settings.user_management_form_label_active }}
+				</td>
+			</tr>
+			{% for user in users %}
+			<tr class="list-item">
+				<td>
+					<span title="{{ user.uid_formated }}">{{ user.uid_trimmed }}</span>
+				</td>
+				<td>
+					<span title="{{ user.email_formated }}">{{ user.email_trimmed }}</span>
+				</td>
+				<td>
+					<span title="{{ user.registered_formated }}">{{ user.registered_trimmed }}</span>
+				</td>
+				<td>
+					<span title="{{ user.accessed_formated }}">{{ user.accessed_trimmed }}</span>
+				</td>
+				<td>
+					{{ user.ip }}
+				</td>
+				<td>
+					<input name="{{ user.key }}" type="checkbox" value="True" {% if user.checked %} checked="checked" {% endif %} {% if user.disabled %} disabled="disabled" {% endif %} />
+				</td>
+			</tr>
+			{% endfor %}
+		</table>
+		<div><input type="submit" value="{{ settings.user_management_form_label_submit }}"></div>
+	</form>
+	{{ pager|safe }}
+</div>

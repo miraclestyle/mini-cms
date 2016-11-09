@@ -1,0 +1,30 @@
+<div class="artists-view">
+	<table class="artists-grid">
+		{% for feed in feeds %}
+		{% if forloop.counter0|divisibleby:feeds_per_row %}
+		<tr>
+		{% endif %}
+			<td>
+				<div class="artist">
+					<div class="artist-title">
+						<a href="{{ feed.view_url }}" title="{{ feed.title_formated }}" class="active">
+							{{ feed.title_trimmed }}
+						</a>
+					</div>
+					{% if feed.cover_src %}
+					<div class="artist-cover">
+						<a href="{{ feed.view_url }}" title="{{ feed.title_formated }}">
+							<img src="{{ feed.cover_src }}" title="{{ feed.title_formated }}" alt="{{ feed.title_formated }}"/>
+						</a>
+					</div>
+					{% endif %}
+				</div>
+			</td>
+		{% if forloop.counter|divisibleby:feeds_per_row or forloop.last %}
+		</tr>
+		{% endif %}
+		{% endfor %}
+	</table>
+	{{ pager|safe }}
+</div>
+

@@ -1,0 +1,12 @@
+<div class="photo-edit-form">
+	<form action="{{ submit_url }}" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+		<div><img src="{{ src }}" title="{{ photo.description_formated }}" alt="{{ photo.description_formated }}"/></div>
+		<div>{{ settings.photo_edit_form_label_description }}</div>
+		<div><textarea name="description" rows="3" cols="30">{{ photo.description_formated }}</textarea></div>
+		<div><input name="published" type="checkbox" value="True" {% if photo.published %} checked="checked" {% endif %} />{{ settings.photo_edit_form_label_published }}</div>
+		<div>
+			<input type="submit" value="{{ settings.photo_edit_form_label_submit }}">
+			<input type="button" name="cancel" value="{{ settings.photo_edit_form_label_cancel }}" onclick="window.location = '{{ cancel_url }}'">
+		</div>
+	</form>
+</div>

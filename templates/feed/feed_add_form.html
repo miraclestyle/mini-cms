@@ -1,0 +1,34 @@
+<div class="feed-add-form">
+	<form action="{{ submit_url }}" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+		<div>{{ settings.feed_add_form_label_title }}</div>
+		<div><input type="text" name="title" id="feed-title" size="100"/></div>
+		<div>{{ settings.feed_add_form_label_path }}</div>
+		<div><input type="text" name="path" id="feed-path" size="70"/>
+		<a href="javascript:StringManipulation.setPath('feed-title', 'feed-path');">{{ settings.feed_add_form_label_path_from_title }}</a></div>
+		<div>{{ settings.feed_add_form_label_type }}</div>
+		<div>
+			<select name="type">
+				{% for type in types %}
+				<option value="{{ type.value }}">{{ type.label }}</option>
+				{% endfor %}
+			</select>
+		</div>
+		<div>{{ settings.feed_add_form_label_content }}</div>
+		<div>{{ content_editor|safe }}</div>
+		<div><input onclick="Elvin.photomanager.open({'type' : 'feed-cover', 'size': 1});" type="button" name="cover-button" value="{{ settings.feed_add_form_label_cover }}"></div>
+		<div id="feed-cover" class="feed-cover selected-photo-box"></div>
+		<div><input onclick="Elvin.photomanager.open({'type' : 'feed-background', 'size': 1});" type="button" name="background-button" value="{{ settings.feed_add_form_label_background }}"></div>
+		<div id="feed-background" class="feed-background selected-photo-box"></div>
+		<div><input onclick="Elvin.photomanager.open({'type' : 'feed-photos', 'size': 0});" type="button" name="photos-button" value="{{ settings.feed_add_form_label_photos }}"></div>
+		<div id="feed-photos" class="feed-photos selected-photos-box"></div>
+		<div class="clear-both"></div>
+		<div><input onclick="Elvin.musicmanager.open({'type' : 'feed-musics', 'size': 0});" type="button" name="musics-button" value="{{ settings.feed_add_form_label_musics }}"></div>
+		<div id="feed-musics" class="feed-musics selected-musics-box"></div>
+		<div class="clear-both"></div>
+		<div><input name="published" type="checkbox" value="True" checked="checked" />{{ settings.feed_add_form_label_published }}</div>
+		<div>
+			<input type="submit" value="{{ settings.feed_add_form_label_submit }}">
+			<input type="button" name="cancel" value="{{ settings.feed_add_form_label_cancel }}" onclick="window.location = '{{ cancel_url }}'">
+		</div>
+	</form>
+</div>

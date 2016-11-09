@@ -1,0 +1,26 @@
+<div class="sponsor-add-form">
+	<form action="{{ submit_url }}" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+		<div>{{ settings.sponsor_add_form_label_title }}</div>
+		<div><input type="text" name="title" id="sponsor-title" size="100"/></div>
+		<div>{{ settings.sponsor_add_form_label_url }}</div>
+		<div><input type="text" name="url" size="100"/></div>
+		<div>{{ settings.sponsor_add_form_label_probability }}</div>
+		<div>
+			<select name="probability">
+				{% for probability in probabilities %}
+				<option value="{{ probability.value }}">{{ probability.label }}</option>
+				{% endfor %}
+			</select>
+		</div>
+		<div><input onclick="Elvin.photomanager.open({'type' : 'sponsor-logo', 'size': 1});" type="button" name="logo-button" value="{{ settings.sponsor_add_form_label_logo }}"></div>
+		<div id="sponsor-logo" class="sponsor-logo selected-photo-box"></div>
+		<div class="clear-both"></div>
+		<div><input name="published" type="checkbox" value="True" checked="yes" />{{ settings.sponsor_add_form_label_published }}</div>
+		<div><input name="record-clicks" type="checkbox" value="True" />{{ settings.sponsor_add_form_label_record_clicks }}</div>
+		<div><input name="record-impressions" type="checkbox" value="True" />{{ settings.sponsor_add_form_label_record_impressions }}</div>
+		<div>
+			<input type="submit" value="{{ settings.sponsor_add_form_label_submit }}">
+			<input type="button" name="cancel" value="{{ settings.sponsor_add_form_label_cancel }}" onclick="window.location = '{{ cancel_url }}'">
+		</div>
+	</form>
+</div>

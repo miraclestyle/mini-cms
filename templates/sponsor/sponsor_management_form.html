@@ -1,0 +1,53 @@
+<div class="sponsor-management-form">
+	<ul class="management-links float-right" accept-charset="UTF-8">
+		{% if sponsor_add %}
+		<li>
+			<a href="{{ add_url }}" title="{{ settings.sponsor_management_form_label_add_title }}">{{ settings.sponsor_management_form_label_add }}</a>
+		</li>
+		{% endif %}
+		{% if sponsor_permissions %}
+		<li>
+			<a href="{{ permissions_url }}" title="{{ settings.sponsor_management_form_label_permissions_title }}">{{ settings.sponsor_management_form_label_permissions }}</a>
+		</li>
+		{% endif %}
+	</ul>
+	<div class="clear-both"></div>
+	<table class="sponsors-grid">
+		{% for sponsor in sponsors %}
+		{% if forloop.counter0|divisibleby:settings.sponsors_per_row %}
+		<tr>
+		{% endif %}
+			<td>
+				<div class="sponsor {% if sponsor.published %} published {% else %} unpublished {% endif %} ">
+					<div class="sponsor-title">
+						<span title="{{ sponsor.title_formated }}">{{ sponsor.title_trimmed }}</span>
+					</div>
+					{% if sponsor.logo_src %}
+					<div class="sponsor-logo">
+						<img src="{{ sponsor.logo_src }}" title="{{ sponsor.title_formated }}" alt="{{ sponsor.title_formated }}"/>
+					</div>
+					{% endif %}
+					<ul class="management-links">
+						<li>
+							<a href="{{ sponsor.view_url }}" title="{{ settings.sponsor_management_form_label_view_title }}">{{ settings.sponsor_management_form_label_view }}</a>
+						</li>
+						{% if sponsor_edit %}
+						<li>
+							<a href="{{ sponsor.edit_url }}" title="{{ settings.sponsor_management_form_label_edit_title }}">{{ settings.sponsor_management_form_label_edit }}</a>
+						</li>
+						{% endif %}
+						{% if sponsor_delete %}
+						<li>
+							<a href="{{ sponsor.delete_url }}" title="{{ settings.sponsor_management_form_label_delete_title }}">{{ settings.sponsor_management_form_label_delete }}</a>
+						</li>
+						{% endif %}
+					</ul>
+				</div>
+			</td>
+		{% if forloop.counter|divisibleby:settings.sponsors_per_row or forloop.last %}
+		</tr>
+		{% endif %}
+		{% endfor %}
+	</table>
+	{{ pager|safe }}
+</div>

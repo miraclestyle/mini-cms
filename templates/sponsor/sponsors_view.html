@@ -1,0 +1,31 @@
+<div class="sponsors-view">
+	<table class="sponsors-grid">
+		{% for sponsor in sponsors %}
+		{% if forloop.counter0|divisibleby:settings.sponsors_per_row %}
+		<tr>
+		{% endif %}
+			<td>
+				<div class="sponsor">
+					{% if sponsor.logo_src %}
+					<div class="sponsor-logo">
+						<a href="{{ sponsor.redirect_url }}" title="{{ sponsor.title_formated }}" target="_blank" rel="nofollow">
+							<img src="{{ sponsor.logo_src }}" title="{{ sponsor.title_formated }}" alt="{{ sponsor.title_formated }}"/>
+						</a>
+					</div>
+					{% else %}
+					<div class="sponsor-title">
+						<a href="{{ sponsor.redirect_url }}" title="{{ sponsor.title_fromated }}" class="active" target="_blank" rel="nofollow">
+							{{ sponsor.title_trimmed }}
+						</a>
+					</div>
+					{% endif %}
+				</div>
+			</td>
+		{% if forloop.counter|divisibleby:settings.sponsors_per_row or forloop.last %}
+		</tr>
+		{% endif %}
+		{% endfor %}
+	</table>
+	{{ pager|safe }}
+</div>
+

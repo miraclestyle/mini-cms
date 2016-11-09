@@ -1,0 +1,64 @@
+<script type="text/javascript">
+$(document).ready(function () { 
+	try {
+		 AppearanceUtils.showHide('music-title', 'music-title-', 'music-content', 'music-content-', 'shown');
+	} catch (e) {
+		
+	}	
+});
+</script>
+
+<div class="music-album-view">
+	<div class="music-album-title">
+		<h1>{{ feed.title_formated }}</h1>
+	</div>
+	{% if feed_cover_src %}
+	<div class="music-album-cover">
+		<img src="{{ feed_cover_src }}" title="{{ feed.title_formated }}" alt="{{ feed.title_formated }}"/>
+	</div>
+	{% endif %}
+	<div class="music-album-content">
+		{{ feed.content_formated|safe }}
+	</div>
+	{% if musics %}
+	<div class="music-album-musics">
+		{% for music in musics %}
+			<div class="music-title" id="music-title-{{ music.key.id }}" show-hide-id="{{ music.key.id }}">
+				<div>
+			    <div class="music-player">
+			    <div id="audioplayer-{{ music.key.id }}"><a href="{{ music.src }}" title="{{ music.title_formated }}" alt="{{ music.title_formated }}">{{ music.title_trimmed }}</a></div>
+  
+                 <audio src="{{music.src}}" preload="none"></audio> 
+                        
+                       
+                        <div class="clear-both"></div>
+                        <div class="music-content" style="display:none;" id="music-content-{{ music.key.id }}">
+                              {{ music.content_formated|safe }}
+                        </div>
+             
+				</div>
+				<div class="music-link">
+                        <a href="{{ music.view_url }}" title="More Information">››</a>
+                </div>
+		 
+		          <div class="clear-both"></div>
+			</div>
+			</div>
+			
+		{% endfor %}
+	</div>
+	{% endif %}
+	{{ musics_pager|safe }}
+	<div id="music-album-fb-like">
+		<div id="music-album-fb-like-inner">
+			<fb:like href="http://www.{{ settings.site_domain }}{{ like_url }}" show_faces="true" width="450" colorscheme="dark">
+		</div>
+	</div>
+</div>
+</div>
+<style>
+	.music-album-view .music-player {
+		float: left;
+		width: 525px;
+	 }
+</style>

@@ -1,0 +1,30 @@
+<div class="user-permission-management-form">
+	<form action="{{ submit_url }}" method="POST" accept-charset="UTF-8">
+		<table class="users-grid">
+			<tr>
+				<td>
+					{{ settings.user_permission_management_form_label_user }}
+				</td>
+				{% for permission in permissions %}
+				<td>
+					<span title="{{ permission.title_formated }}">{{ permission.title_trimmed }}</span>
+				</td>
+				{% endfor %}
+			</tr>
+			{% for user in users %}
+			<tr class="list-item">
+				<td>
+					<span title="{{ user.email_formated }}">{{ user.email_trimmed }}</span>
+				</td>
+				{% for perm in user.permissions_extended %}
+				<td>
+					<input name="user-permissions" type="checkbox" value="{{ user.key }}-{{ perm.permission }}" title="{{ user.email_formated }} {{ perm.permission }}" {% if perm.checked %} checked="checked" {% endif %} />
+				</td>
+				{% endfor %}
+			</tr>
+			{% endfor %}
+		</table>
+		<div><input type="submit" value="{{ settings.user_permission_management_form_label_submit }}"></div>
+	</form>
+	{{ pager|safe }}
+</div>

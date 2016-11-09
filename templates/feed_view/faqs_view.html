@@ -1,0 +1,30 @@
+<script type="text/javascript">
+$(document).ready(function () { 
+	try {
+		AppearanceUtils.showHide('faq-title', 'faq-title-', 'faq-content', 'faq-content-', 'shown');
+	} catch (e) {
+		
+	}	
+});
+</script>
+
+<div class="faqs-view">
+	<table class="faqs-grid">
+		{% for feed in feeds %}
+		<tr>
+			<td>
+				<div class="faq">
+					<div class="faq-title" id="faq-title-{{ feed.key.id }}" show-hide-id="{{ feed.key.id }}">
+						<a href="{{ feed.view_url }}" title="{{ feed.title_formated }}">{{ feed.title_trimmed }}</a>
+					</div>
+					<div class="faq-content" style="display:none;" id="answer-{{ feed.key.id }}">
+						{{ feed.content_formated|safe }}
+					</div>
+				</div>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+	{{ pager|safe }}
+</div>
+

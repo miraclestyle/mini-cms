@@ -1,0 +1,12 @@
+<div class="photo-add-form">
+	<form action="{{ submit_url }}" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+		<div>{{ settings.photo_add_form_label_image }}</div>
+		<div><input type="file" name="photo"/></div>
+		<div>{{ settings.photo_add_form_label_description }}</div><div><textarea name="description" rows="3" cols="30"></textarea></div>
+		<div><input name="published" type="checkbox" value="True" checked="yes" />{{ settings.photo_add_form_label_published }}</div>
+		<div>
+			<input type="submit" value="{{ settings.photo_add_form_label_submit }}">
+			<input type="button" name="cancel" value="{{ settings.photo_add_form_label_cancel }}" onclick="window.location = '{{ cancel_url }}'">
+		</div>
+	</form>
+</div>

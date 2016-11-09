@@ -1,0 +1,20 @@
+<div class="custom-gallery-view">
+	<table class="photos-grid">
+		{% for photo in photos %}
+		{% if forloop.counter0|divisibleby:3 %}
+		<tr>
+		{% endif %}
+			<td>
+				<div class="photo">
+					<a fb-like-url="http://www.{{ settings.site_domain }}{{ photo.like_url }}" href="{{ photo.view_url }}" class="render-image-fancybox fancybox" rel="photos">
+						<img src="{{ photo.src }}" title="{{ photo.description_formated }}" alt="{{ photo.description_formated }}"/>
+					</a>
+				</div>
+			</td>
+		{% if forloop.counter|divisibleby:3 or forloop.last %}
+		</tr>
+		{% endif %}
+		{% endfor %}
+	</table>
+	{{ pager|safe }}
+</div>

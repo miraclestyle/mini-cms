@@ -1,0 +1,70 @@
+<div class="block-management-form">
+	<ul class="management-links float-right">
+		{% if block_add %}
+		<li>
+			<a href="{{ add_url }}" title="{{ settings.block_management_form_label_add_title }}">{{ settings.block_management_form_label_add }}</a>
+		</li>
+		{% endif %}
+		{% if block_permissions %}
+		<li>
+			<a href="{{ permissions_url }}" title="{{ settings.block_management_form_label_permissions_title }}">{{ settings.block_management_form_label_permissions }}</a>
+		</li>
+		{% endif %}
+	</ul>
+	<div class="clear-both"></div>
+	<table class="blocks-grid">
+		<tr>
+			<td>
+				{{ settings.block_management_form_label_title }}
+			</td>
+			<td>
+				{{ settings.block_management_form_label_position }}
+			</td>
+			<td>
+				{{ settings.block_management_form_label_weight }}
+			</td>
+			<td>
+				{{ settings.block_management_form_label_published }}
+			</td>
+			<td>
+				{{ settings.block_management_form_label_management_links }}
+			</td>
+		</tr>
+		{% for block in blocks %}
+		<tr class="list-item">
+			<td>
+				<span title="{{ block.title_formated }}">{{ block.title_trimmed }}</span>
+			</td>
+			<td>
+				{{ block.position }}
+			</td>
+			<td>
+				{{ block.weight }}
+			</td>
+			<td>
+				{{ block.published }}
+			</td>
+			<td>
+				<ul class="management-links">
+					{% if block_edit %}
+					<li>
+						<a href="{{ block.edit_url }}" title="{{ settings.block_management_form_label_edit_title }}">{{ settings.block_management_form_label_edit }}</a>
+					</li>
+					{% endif %}
+					{% if block_delete %}
+					<li>
+						<a href="{{ block.delete_url }}" title="{{ settings.block_management_form_label_delete_title }}">{{ settings.block_management_form_label_delete }}</a>
+					</li>
+					{% endif %}
+					{% if block_permissions %}
+					<li>
+						<a href="{{ block.view_permissions_url }}" title="{{ settings.block_management_form_label_view_permissions_title }}">{{ settings.block_management_form_label_view_permissions }}</a>
+					</li>
+					{% endif %}
+				</ul>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+	{{ pager|safe }}
+</div>

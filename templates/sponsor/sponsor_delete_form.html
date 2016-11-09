@@ -1,0 +1,12 @@
+<div class="sponsor-delete-form">
+	<form action="{{ submit_url }}" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+		<h1>{{ delete_question }}</h1>
+		{% if sponsor_logo_src %}
+			<div><img src="{{ sponsor_logo_src }}" title="{{ sponsor.title_formated }}" alt="{{ sponsor.title_formated }}"/></div>
+		{% endif %}
+		<div>
+			<input type="submit" value="{{ settings.sponsor_delete_form_label_submit }}">
+			<input type="button" name="cancel" value="{{ settings.sponsor_delete_form_label_cancel }}" onclick="window.location = '{{ cancel_url }}'">
+		</div>
+	</form>
+</div>

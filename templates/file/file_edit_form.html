@@ -1,0 +1,12 @@
+<div class="file-edit-form">
+	<form action="{{ submit_url }}" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+		<div><a href="{{ src }}" title="{{ file.title_formated }}" alt="{{ file.title_formated }}">{{ file.title_trimmed }}</a></div>
+		<div>{{ settings.file_edit_form_label_title }}</div>
+		<div><input type="text" name="title" size="100" value="{{ file.title_formated }}"/></div>
+		<div><input name="published" type="checkbox" value="True" {% if file.published %} checked="checked" {% endif %} />{{ settings.file_edit_form_label_published }}</div>
+		<div>
+			<input type="submit" value="{{ settings.file_edit_form_label_submit }}">
+			<input type="button" name="cancel" value="{{ settings.file_edit_form_label_cancel }}" onclick="window.location = '{{ cancel_url }}'">
+		</div>
+	</form>
+</div>

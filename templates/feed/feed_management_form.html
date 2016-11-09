@@ -1,0 +1,62 @@
+<div class="feed-management-form">
+	<ul class="management-links float-right">
+		{% if feed_add %}
+		<li>
+			<a href="{{ add_url }}" title="{{ settings.feed_management_form_label_add_title }}">{{ settings.feed_management_form_label_add }}</a>
+		</li>
+		{% endif %}
+		{% if feed_permissions %}
+		<li>
+			<a href="{{ permissions_url }}" title="{{ settings.feed_management_form_label_permissions_title }}">{{ settings.feed_management_form_label_permissions }}</a>
+		</li>
+		{% endif %}
+	</ul>
+	<div class="clear-both"></div>
+	<table class="feeds-grid">
+		<tr>
+			<td>
+				{{ settings.feed_management_form_label_title }}
+			</td>
+			<td>
+				{{ settings.feed_management_form_label_type }}
+			</td>
+			<td>
+				{{ settings.feed_management_form_label_published }}
+			</td>
+			<td>
+				{{ settings.feed_management_form_label_management_links }}
+			</td>
+		</tr>
+		{% for feed in feeds %}
+		<tr class="list-item">
+			<td>
+				<span title="{{ feed.title_formated }}">{{ feed.title_trimmed }}</span>
+			</td>
+			<td>
+				{{ feed.type_label }}
+			</td>
+			<td>
+				{{ feed.published }}
+			</td>
+			<td>
+				<ul class="management-links">
+					<li>
+						<a href="{{ feed.view_url }}" title="{{ settings.feed_management_form_label_view_title }}">{{ settings.feed_management_form_label_view }}</a>
+					</li>
+					{% if feed.can_edit %}
+					<li>
+						<a href="{{ feed.edit_url }}" title="{{ settings.feed_management_form_label_edit_title }}">{{ settings.feed_management_form_label_edit }}</a>
+					</li>
+					{% endif %}
+					{% if feed.can_delete %}
+					<li>
+						<a href="{{ feed.delete_url }}" title="{{ settings.feed_management_form_label_delete_title }}">{{ settings.feed_management_form_label_delete }}</a>
+					</li>
+					{% endif %}
+				</ul>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+	{{ pager|safe }}
+</div>

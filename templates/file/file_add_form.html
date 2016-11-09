@@ -1,0 +1,13 @@
+<div class="file-add-form">
+	<form action="{{ submit_url }}" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+		<div>{{ settings.file_add_form_label_file }}</div>
+		<div><input type="file" name="file"/></div>
+		<div>{{ settings.file_add_form_label_title }}</div>
+		<div><input type="text" name="title" size="100"/></div>
+		<div><input name="published" type="checkbox" value="True" checked="yes" />{{ settings.file_add_form_label_published }}</div>
+		<div>
+			<input type="submit" value="{{ settings.file_add_form_label_submit }}">
+			<input type="button" name="cancel" value="{{ settings.file_add_form_label_cancel }}" onclick="window.location = '{{ cancel_url }}'">
+		</div>
+	</form>
+</div>

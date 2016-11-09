@@ -1,0 +1,9 @@
+{% if blocks %}
+<div class="blocks">
+	{% for block in blocks %}
+	<div class="block">
+		{{ block|safe }}
+	</div>
+	{% endfor %}
+</div>
+{% endif %}

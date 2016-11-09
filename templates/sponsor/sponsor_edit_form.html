@@ -1,0 +1,35 @@
+<div class="sponsor-edit-form">
+	<form action="{{ submit_url }}" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+		<div>{{ settings.sponsor_edit_form_label_title }}</div>
+		<div><input type="text" name="title" value="{{ sponsor.title_formated }}" id="sponsor-title" size="100"/></div>
+		<div>{{ settings.sponsor_edit_form_label_url }}</div>
+		<div><input type="text" name="url" value="{{ sponsor.url_formated }}" size="100"/></div>
+		<div>{{ settings.sponsor_edit_form_label_probability }}</div>
+		<div>
+			<select name="probability">
+				{% for probability in probabilities %}
+				<option value="{{ probability.value }}" {% if probability.selected %} selected="selected" {% endif %} >{{ probability.label }}</option>
+				{% endfor %}
+			</select>
+		</div>
+		<div><input onclick="Elvin.photomanager.open({'type' : 'sponsor-logo', 'size': 1});" type="button" name="logo-button" value="{{ settings.sponsor_edit_form_label_logo }}"></div>
+		<div id="sponsor-logo" class="sponsor-logo selected-photo-box">
+			{% if sponsor_logo_src %}
+			<div id="img-sponsor-logo-{{ sponsor.logo.key }}" rel="{{ sponsor.logo.key }}" class="photo-selected">
+				<input type="hidden" name="sponsor-logo" value="{{ sponsor.logo.key }}">
+				<div class="photo"><img src="{{ sponsor_logo_src }}" />
+					<a class="deleteimg" onclick="$('#img-sponsor-logo-{{ sponsor.logo.key }}').remove();" href="javscript:;">X</a>
+				</div>
+			</div>
+			{% endif %}
+		</div>
+		<div class="clear-both"></div>
+		<div><input name="published" type="checkbox" value="True" {% if sponsor.published %} checked="checked" {% endif %} />{{ settings.sponsor_edit_form_label_published }}</div>
+		<div><input name="record-clicks" type="checkbox" value="True" {% if sponsor.record_clicks %} checked="checked" {% endif %} />{{ settings.sponsor_edit_form_label_record_clicks }}</div>
+		<div><input name="record-impressions" type="checkbox" value="True" {% if sponsor.record_impressions %} checked="checked" {% endif %} />{{ settings.sponsor_edit_form_label_record_impressions }}</div>
+		<div>
+			<input type="submit" value="{{ settings.sponsor_edit_form_label_submit }}"> 
+			<input type="button" name="cancel" value="{{ settings.sponsor_edit_form_label_cancel }}" onclick="window.location = '{{ cancel_url }}'">
+		</div>
+	</form>
+</div>

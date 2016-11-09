@@ -1,0 +1,60 @@
+<div class="custom-contact-form">
+	<ul class="management-links float-right">
+		{% if form_permissions %}
+		<li>
+			<a href="{{ permissions_url }}" title="Manage Contact Form Permissions">Permissions</a>
+		</li>
+		{% endif %}
+	</ul>
+	<div class="clear-both"></div>
+	{% if submitted %}
+	<div class="form-message"><p>Hvala što ste nas kontaktirali. Vaša poruka će biti razmotrena čim prije.</p></div>
+	{% else %}
+	{% if forbidden %}
+	<div class="form-message">
+		<p>
+			BOOKING<br>
+ema@emir-frozencamels.com<br>
++387 (0)61 519 651<br>
++385 (0)98 885 055<br></p>
+		<p>
+			PRESS<br>
+ema@emir-frozencamels.com<br>
++387 (0)61 519 651<br>
++385 (0)98 885 055<br></p>
+		
+
+	</div>
+	{% else %}
+	<div class="form-message">
+		<p>
+			BOOKING<br>
+ema@emir-frozencamels.com<br>
++387 (0)61 519 651<br>
++385 (0)98 885 055<br></p>
+		<p>
+			PRESS<br>
+ema@emir-frozencamels.com<br>
++387 (0)61 519 651<br>
++385 (0)98 885 055<br></p>
+		<p>
+			Ili nam se javite putem web formulara.</p>
+	</div>
+	<form action="{{ submit_url }}" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+		<div class="form-fields">
+			<div class="field {% if fields.contact_email.required_validate %} required-validate {% endif %}">
+				<label for="contact-email">E-mail: <span class="required" title="Ovo polje je obavezno.">*</span></label>
+				<input id="contact-email" type="text" maxlength="128" name="contact_email" size="60" value="{{ fields.contact_email.value }}" {% if fields.contact_email.readonly %} readonly="readonly" {% endif %} />
+			</div>
+			<div class="field {% if fields.message.required_validate %} required-validate {% endif %}">
+				<label for="contact-message">Poruka: <span class="required" title="Ovo polje je obavezno.">*</span></label>
+				<textarea id="contact-message" cols="60" rows="5" name="message">{{ fields.message.value }}</textarea> 
+			</div>
+		</div>
+		<div>
+			<input type="submit" value="Pošalji">
+		</div>
+	</form>
+	{% endif %}
+	{% endif %}
+</div>

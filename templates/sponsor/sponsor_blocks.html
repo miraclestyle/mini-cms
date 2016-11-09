@@ -1,0 +1,21 @@
+<div class="sponsor-blocks">
+	{% for sponsor in sponsors %}
+	<div class="sponsor">
+		{% if sponsor.logo_src %}
+		<div class="sponsor-logo">
+			<a href="{{ sponsor.redirect_url }}" title="{{ sponsor.title_formated }}" target="_blank" rel="nofollow">
+				<img src="{{ sponsor.logo_src }}" title="{{ sponsor.title_formated }}" alt="{{ sponsor.title_formated }}"/>
+			</a>
+		</div>
+		{% else %}
+		<div class="sponsor-title">
+			<a href="{{ sponsor.redirect_url }}" title="{{ sponsor.title_formated }}" class="active" target="_blank" rel="nofollow">
+				{{ sponsor.title_trimmed }}
+			</a>
+		</div>
+		{% endif %}
+	</div>
+	{% endfor %}
+	{{ pager|safe }}
+</div>
+

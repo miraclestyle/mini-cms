@@ -1,0 +1,12 @@
+<script type="text/javascript">
+$(document).ready(function () { 
+	try {
+		AppearanceUtils.showHide('page-trigger', 'page-trigger-', 'page-content', 'page-content-', 'shown');
+	} catch (e) {
+		
+	}	
+});
+</script>
+<div class="page-view">
+	{{ feed.content_formated|safe }}
+</div>

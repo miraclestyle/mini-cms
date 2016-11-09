@@ -1,0 +1,179 @@
+<div class="custom-fpsa-form">
+	<ul class="management-links float-right">
+		{% if form_permissions %}
+		<li>
+			<a href="{{ permissions_url }}" title="Manage FREE PHOTO SESSION APPLICATION Permissions">Permissions</a>
+		</li>
+		{% endif %}
+	</ul>
+	<div class="clear-both"></div>
+	{% if submitted %}
+	<div class="form-message"><p>Thank you for applying for Free Photo Session. 
+	We will take your application in consideration as 
+	soon as possible and contact you once we are ready 
+	for futher steps.</p></div>
+	{% else %}
+	{% if forbidden %}
+	<div class="form-message"><p>For additional information regarding the Free Photo Session go to
+	<a href="http://www.elvinkosova.com/frequently-asked-questions-free-services"><strong>FAQ</strong></a>
+	section. Before you can access the Free Photo Session application form
+	you have to register and login to <a href="http://www.elvinkosova.com">elvinkosova.com</a>
+	web site. You can use facebook login button at the right upper corner to
+	easily complete registration and login to the site. Once you have logged
+	in return to this page to apply for Free Photo Session. Make sure that emails with suffix
+	@elvinkosova.com are not sent to your junk mail or spam mail!</p></div>
+	{% else %}
+	<div class="form-message"><p>For additional information regarding the Free Photo Session go to
+	<a href="http://www.elvinkosova.com/frequently-asked-questions-free-services"><strong>FAQ</strong></a>
+	section. All fields of
+	the form marked with <span class="required" title="This field is required.">*</span> are required! Make sure that emails with suffix
+	@elvinkosova.com are not sent to your junk mail or spam mail!</p></div>
+	<form action="{{ submit_url }}" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+		<div class="form-fields">
+			<fieldset class="fieldset"><legend>Current Location</legend>
+				<div class="field {% if fields.residence_city.required_validate %} required-validate {% endif %}">
+					<label for="residence-city">City: <span class="required" title="This field is required.">*</span></label>
+					<input type="text" maxlength="128" name="residence_city" id="residence-city" size="60" value="{{ fields.residence_city.value }}"/>
+				</div>
+				<div class="field {% if fields.residence_area.required_validate %} required-validate {% endif %}">
+					<label for="residence-area">Area: <span class="required" title="This field is required.">*</span></label>
+					<input type="text" maxlength="128" name="residence_area" id="residence-area" size="60" value="{{ fields.residence_area.value }}"/>
+				</div>
+				<div class="field {% if fields.residence_country.required_validate %} required-validate {% endif %}">
+					<label for="residence-country">Country: <span class="required" title="This field is required.">*</span></label>
+					<input type="text" maxlength="128" name="residence_country" id="residence-country" size="60" value="{{ fields.residence_country.value }}"/>
+				</div>
+			</fieldset>
+			<fieldset class="fieldset"><legend>Personal Details</legend>
+				<div class="field {% if fields.personal_first_name.required_validate %} required-validate {% endif %}">
+					<label for="personal-first-name">First Name: <span class="required" title="This field is required.">*</span></label>
+					<input type="text" maxlength="128" name="personal_first_name" id="personal-first-name" size="60" value="{{ fields.personal_first_name.value }}"/>
+				</div>
+				<div class="field {% if fields.personal_last_name.required_validate %} required-validate {% endif %}">
+					<label for="personal-last-name">Last Name: <span class="required" title="This field is required.">*</span></label>
+					<input type="text" maxlength="128" name="personal_last_name" id="personal-last-name" size="60" value="{{ fields.personal_last_name.value }}"/>
+				</div>
+				<div class="field {% if fields.personal_sex.required_validate %} required-validate {% endif %}">
+					<label for="personal-sex">Sex: <span class="required" title="This field is required.">*</span></label>
+					<select name="personal_sex" id="personal-sex">
+					{% for item in fields.personal_sex.items %}
+						<option value="{{ item.value }}" {% if item.selected %} selected="selected" {% endif %}>{{ item.label }}</option>
+					{% endfor %}
+					</select>
+				</div>
+				<div class="field {% if fields.birth_day.required_validate %} required-validate {% endif %} {% if fields.birth_month.required_validate %} required-validate {% endif %} {% if fields.birth_year.required_validate %} required-validate {% endif %}" id="date-of-birth">
+					<label for="date-of-birth">Date of Birth: <span class="required" title="This field is required.">*</span></label>
+					<select name="birth_day">
+					{% for item in fields.birth_day.items %}
+						<option value="{{ item.value }}" {% if item.selected %} selected="selected" {% endif %}>{{ item.label }}</option>
+					{% endfor %}	
+					</select>
+					<select name="birth_month">
+					{% for item in fields.birth_month.items %}
+						<option value="{{ item.value }}" {% if item.selected %} selected="selected" {% endif %}>{{ item.label }}</option>
+					{% endfor %}	
+					</select>
+					<select name="birth_year">
+					{% for item in fields.birth_year.items %}
+						<option value="{{ item.value }}" {% if item.selected %} selected="selected" {% endif %}>{{ item.label }}</option>
+					{% endfor %}
+					</select>
+				</div>
+				<div class="field {% if fields.birth_city.required_validate %} required-validate {% endif %}">
+					<label for="birth-city">City of Birth: <span class="required" title="This field is required.">*</span></label>
+					<input type="text" maxlength="128" name="birth_city" id="birth-city" size="60" value="{{ fields.birth_city.value }}"/>
+				</div>
+				<div class="field {% if fields.birth_country.required_validate %} required-validate {% endif %}">
+					<label for="birth-country">Country of Birth: <span class="required" title="This field is required.">*</span></label>
+					<input type="text" maxlength="128" name="birth_country" id="birth-country" size="60" value="{{ fields.birth_country.value }}"/>
+				</div>
+			</fieldset>
+			<fieldset class="fieldset"><legend>Contacts</legend>
+				<div class="field {% if fields.contact_phone.required_validate %} required-validate {% endif %}">
+					<label for="contact-phone">Mobile Phone Number: <span class="required" title="This field is required.">*</span></label>
+					<input type="text" maxlength="128" name="contact_phone" id="contact-phone" size="60" value="{{ fields.contact_phone.value }}"/>
+					<span class="description">Include national and area dial code as well. Example of correct format: +387 (0)62 372 406</span>
+				</div>
+				<div class="field {% if fields.contact_email.required_validate %} required-validate {% endif %}">
+					<label for="contact-email">E-mail: <span class="required" title="This field is required.">*</span></label>
+					<input type="text" maxlength="128" name="contact_email" id="contact-email" size="60" value="{{ fields.contact_email.value }}" {% if fields.contact_email.readonly %} readonly="readonly" {% endif %}/>
+				</div>
+			</fieldset>
+			<fieldset class="fieldset"><legend>Body Measurements and Features</legend>
+				<div class="field {% if fields.body_features_eyes.required_validate %} required-validate {% endif %}">
+					<label for="body-features-eyes">Eyes: <span class="required" title="This field is required.">*</span></label>
+					<select name="body_features_eyes" id="body-features-eyes" >
+					{% for item in fields.body_features_eyes.items %}
+						<option value="{{ item.value }}" {% if item.selected %} selected="selected" {% endif %}>{{ item.label }}</option>
+					{% endfor %}
+					</select> 
+				</div>
+				<div class="field {% if fields.body_features_hair.required_validate %} required-validate {% endif %}">
+					<label for="body-features-hair">Hair: <span class="required" title="This field is required.">*</span></label>
+					<select name="body_features_hair" id="body-features-hair" >
+					{% for item in fields.body_features_hair.items %}
+						<option value="{{ item.value }}" {% if item.selected %} selected="selected" {% endif %}>{{ item.label }}</option>
+					{% endfor %}
+					</select>
+				</div>
+				<div class="field {% if fields.body_features_height.required_validate %} required-validate {% endif %}">
+					<label for="body-features-height">Height: <span class="required" title="This field is required.">*</span></label>
+					<input type="text" maxlength="128" name="body_features_height" id="body-features-height" size="60" value="{{ fields.body_features_height.value }}"/>
+					<span class="field-suffix">cm</span>
+				</div>
+				<div class="field {% if fields.body_features_bust.required_validate %} required-validate {% endif %}">
+					<label for="body-features-bust">Bust: <span class="required" title="This field is required.">*</span></label>
+					<input type="text" maxlength="128" name="body_features_bust" id="body-features-bust" size="60" value="{{ fields.body_features_bust.value }}"/>
+					<span class="field-suffix">cm</span>
+				</div>
+				<div class="field {% if fields.body_features_waist.required_validate %} required-validate {% endif %}">
+					<label for="body-features-waist">Waist: <span class="required" title="This field is required.">*</span></label>
+					<input type="text" maxlength="128" name="body_features_waist" id="body-features-waist" size="60" value="{{ fields.body_features_waist.value }}"/>
+					<span class="field-suffix">cm</span>
+				</div>
+				<div class="field {% if fields.body_features_hips.required_validate %} required-validate {% endif %}">
+					<label for="body-features-hips">Hips: <span class="required" title="This field is required.">*</span></label>
+					<input type="text" maxlength="128" name="body_features_hips" id="body-features-hips" size="60" value="{{ fields.body_features_hips.value }}"/>
+					<span class="field-suffix">cm</span>
+				</div>
+				<div class="field {% if fields.body_features_weight.required_validate %} required-validate {% endif %}">
+					<label for=""body-features-weight"">Weight: <span class="required" title="This field is required.">*</span></label>
+					<input type="text" maxlength="128" name="body_features_weight" id="body-features-weight" size="60" value="{{ fields.body_features_weight.value }}"/>
+					<span class="field-suffix">kg</span>
+				</div>
+			</fieldset>
+			<fieldset class="fieldset"><legend>Other</legend>
+				<div class="field {% if fields.spoken_languages.required_validate %} required-validate {% endif %}">
+					<label for="spoken-languages">Spoken Languages: <span class="required" title="This field is required.">*</span></label>
+					<input type="text" maxlength="128" name="spoken_languages" id="spoken-languages" size="60" value="{{ fields.spoken_languages.value }}"/>
+					<span class="description">Separate each language that you state by comma.</span>
+				</div>
+				<div class="field {% if fields.body_exposure_preference.required_validate %} required-validate {% endif %}" id="body-exposure-preference">
+					<label for="body-exposure-preference">I prefer to be photographed: <span class="required" title="This field is required.">*</span></label>
+					{% for item in fields.body_exposure_preference.items %}
+					<div class="checkbox">
+						<label for="body-exposure-preference-{{ item.key }}"><input name="body_exposure_preference" id="body-exposure-preference-{{ item.key }}" type="checkbox" value="{{ item.value }}" {% if item.checked %} checked="checked" {% endif %}/> {{ item.label }}</label>
+					</div>
+					{% endfor %}
+				</div>
+				<div class="field {% if fields.preferred_styles.required_validate %} required-validate {% endif %}" id="preferred-styles">
+					<label for="preferred-styles">I prefer following photography styles: <span class="required" title="This field is required.">*</span></label>
+					{% for item in fields.preferred_styles.items %}
+					<div class="checkbox">
+						<label for="preferred-styles-{{ item.key }}"><input name="preferred_styles" id="preferred-styles-{{ item.key }}" type="checkbox" value="{{ item.value }}" {% if item.checked %} checked="checked" {% endif %}/> {{ item.label }}</label>
+					</div>
+					{% endfor %}
+				</div>
+				<div class="field">
+					<label for="note">Note: </label>
+					<textarea cols="60" rows="5" name="note" id="note">{{ fields.note.value }}</textarea>
+				</div>
+			</fieldset>
+		</div>
+		<div>
+			<input type="submit" value="Submit">
+		</div>
+	</form>
+	{% endif %}
+	{% endif %}
+</div>

@@ -1,0 +1,25 @@
+<div class="photo-album-view">
+	<table class="photos-grid">
+		{% for photo in photos %}
+		{% if forloop.counter0|divisibleby:photos_per_row %}
+		<tr>
+		{% endif %}
+			<td>
+				<div class="photo">
+					<a fb-like-url="http://www.{{ settings.site_domain }}{{ photo.like_url }}" href="{{ photo.view_url }}" class="render-image-fancybox fancybox" rel="photos">
+						<img src="{{ photo.src }}" title="{{ photo.description_formated }}" alt="{{ photo.description_formated }}"/>
+					</a>
+				</div>
+			</td>
+		{% if forloop.counter|divisibleby:photos_per_row or forloop.last %}
+		</tr>
+		{% endif %}
+		{% endfor %}
+	</table>
+	{{ photos_pager|safe }}
+	<div id="photo-album-fb-like">
+		<div id="photo-album-fb-like-inner">
+			<fb:like href="http://www.{{ settings.site_domain }}{{ like_url }}" show_faces="true" width="450" colorscheme="dark">
+		</div>
+	</div>
+</div>

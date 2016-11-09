@@ -1,0 +1,63 @@
+<script type="text/javascript">    
+    function wait_for_load ()
+    {
+    	$("div#scroll-start").width(0);
+    	$("div#makeMeScrollable").smoothDivScroll({autoScroll: "onstart", autoScrollDirection: "left", autoScrollStep: 50, autoScrollInterval: 1, scrollInterval: 1, scrollStep: 10, startAtElementId: "scroll-start", visibleHotSpots: ""});
+    	$("div.scrollingHotSpotLeft").hide();
+    	$("div.scrollingHotSpotRight").hide();
+    	$("div#makeMeScrollable").smoothDivScroll({autoScrollLeftLimitReached: function() {
+    		$("div#makeMeScrollable").smoothDivScroll("stopAutoScroll");
+    		$("scrollingHotSpotRight").show();
+    	}});
+    }
+
+    $(document).ready(function () { 
+    	// init the calculations after images, iframes and everything else gets loaded
+    	$(window).load(
+    			function() {
+    				$('.artist-view div.photo img').each(function (index) {
+
+    					if ($(this).width() != 0 && $(this).height() != 0)
+
+    					{
+
+    						$(this).attr({ "width" : $(this).width(), "height" : $(this).height() });
+
+
+    					}
+
+
+    				});
+
+    				// just wait half a second before the scrollers get applied
+    				setTimeout("wait_for_load()", 500);
+    			}
+    	);
+
+    });
+</script>
+
+<div class="artist-view">
+	<div id="makeMeScrollable">
+		<div class="scrollingHotSpotLeft"></div>
+		<div class="scrollingHotSpotRight"></div>
+		<div class="scrollWrapper">
+		<div class="scrollableArea">
+		{% for photo in photos %}
+			<div class="photo">
+				<img src="{{ photo.src }}" title="{{ photo.description_formated }}" alt="{{ photo.description_formated }}" />
+			</div>
+			{% if forloop.last %} <div id="scroll-start"></div> {% endif %}
+		{% endfor %}
+		</div>
+		</div>
+	</div>
+	{{ photos_pager|safe }}
+	<div id="artist-fb-like">
+		<div id="artist-fb-like-inner">
+			<fb:like href="http://www.{{ settings.site_domain }}{{ like_url }}" show_faces="true" width="450" colorscheme="light">
+		</div>
+	</div>
+</div>
+
+

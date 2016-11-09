@@ -1,0 +1,19 @@
+{% if paginator.pagers %}
+<div class="pager">
+	<ul class="pager-links">
+		{% if paginator.pagers %}
+		{% for pager in paginator.pagers %}
+			{% if pager.href %}
+			<li>
+				<a title="{{ pager.title }}" href="{{ pager.href }}">{{ pager.title }}</a>
+			</li>
+			{% else %}
+			<li>
+				<span class="active" title="{{ pager.title }}">{{ pager.title }}</span>
+			</li>
+			{% endif %}
+		{% endfor %}
+		{% endif %}
+	</ul>
+</div>
+{% endif %}

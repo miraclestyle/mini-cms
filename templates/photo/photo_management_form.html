@@ -1,0 +1,76 @@
+<script type="text/javascript">
+$(document).ready(function () { 
+	try {
+		if (top.Elvin.photomanager.instance == true) {
+			
+			if (top.Elvin.photomanager.poptions['ckeditor']) {$('#insertations').remove();}
+			 
+			
+	 
+				for (var rel in top.Elvin.photomanager.selected) {
+				  
+					 $('.photo-management-form img[rel='+rel+']').addClass('selected-photo');
+			
+    		    
+				}
+	 
+			
+			
+		} else { $('#insertations').remove(); }
+		
+	} catch (e) {
+		
+	}	
+});
+</script>
+ 
+<div class="photo-management-form">
+	<ul class="management-links float-right">
+		{% if photo_add %}
+		<li>
+			<a href="{{ add_url }}" title="{{ settings.photo_management_form_label_add_title }}">{{ settings.photo_management_form_label_add }}</a>
+		</li>
+		{% endif %}
+		{% if photo_permissions %}
+		<li>
+			<a href="{{ permissions_url }}" title="{{ settings.photo_management_form_label_permissions_title }}">{{ settings.photo_management_form_label_permissions }}</a>
+		</li>
+		{% endif %}
+	</ul>
+	<div class="clear-both"></div>
+	<table class="photos-grid">
+		{% for photo in photos %}
+		{% if forloop.counter0|divisibleby:settings.photos_per_row %}
+		<tr>
+		{% endif %}
+			<td>
+				<div class="photo">
+					<img style="width:{{settings.photo_s_w}}px;height:auto;" class="selectable-photo {% if photo.published %} published {% else %} unpublished {% endif %} " onclick="top.Elvin.photomanager.select(this);" src="{{ photo.src }}" title="{{ photo.description_formated }}" alt="{{ photo.description_formated }}" rel="{{ photo.key }}"/>
+					<ul class="management-links">
+						<li>
+							<a href="{{ photo.view_url }}" title="{{ settings.photo_management_form_label_view_title }}">{{ settings.photo_management_form_label_view }}</a>
+						</li>
+						{% if photo_edit %}
+						<li>
+							<a href="{{ photo.edit_url }}" title="{{ settings.photo_management_form_label_edit_title }}">{{ settings.photo_management_form_label_edit }}</a>
+						</li>
+						{% endif %}
+						{% if photo_delete %}
+						<li>
+							<a href="{{ photo.delete_url }}" title="{{ settings.photo_management_form_label_delete_title }}">{{ settings.photo_management_form_label_delete }}</a>
+						</li>
+						{% endif %}
+					</ul>
+				</div>
+			</td>
+		{% if forloop.counter|divisibleby:settings.photos_per_row or forloop.last %}
+		</tr>
+		{% endif %}
+		{% endfor %}
+	</table>
+	<div id="insertations">
+			<input type="submit" onclick="top.Elvin.photomanager.insertAll();" value="Insert">
+			<input type="button" name="cancel" value="Cancel" onclick="top.Elvin.photomanager.close()">
+		</div>
+	{{ pager|safe }} 
+</div>

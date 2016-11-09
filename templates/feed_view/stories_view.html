@@ -1,0 +1,56 @@
+<script type="text/javascript">
+$(document).ready(function () { 
+	try {
+		AppearanceUtils.hoverInOut('story', 'story-hover');
+	} catch (e) {
+		
+	}	
+});
+</script>
+
+<div class="stories-view">
+	<div class="stories-list">
+		
+		{% for feed in feeds %}
+	
+		{% if current_request.path == '/' and forloop.counter0 == 0 and not is_pager %}
+ 
+			<div onclick="window.location = '{{ feed.view_url }}'" class="story" id="story-{{ feed.key.id }}"  title="{{ feed.title_formated }}">
+				{% if feed.cover_src %}
+				<div class="story-cover">
+					<img src="{{ feed.cover_src }}" title="{{ feed.title_formated }}" alt="{{ feed.title_formated }}"/>
+				</div>
+				{% endif %}
+				<div class="story-body">
+					<div class="story-title"><h2>{{ feed.title }}</h2></div>
+				 
+					<div class="clear-both"></div>
+					<div class="story-content">{{ feed.content_hide_tags|safe }}</div>
+					
+				</div>
+			</div>
+		 
+		{% else %}
+		<div class="story" id="story-{{ feed.key.id }}" onclick="window.location = '{{ feed.view_url }}'" title="{{ feed.title_formated }}">
+			{% if feed.cover_src %}
+			<div class="story-cover">
+				<img src="{{ feed.cover_src }}" title="{{ feed.title_formated }}" alt="{{ feed.title_formated }}"/>
+			</div>
+			{% endif %}
+			<div class="story-body">
+				<div class="story-title"><h2>{{ feed.title_trimmed }}</h2></div>
+			
+			
+				<div class="clear-both"></div>
+				<div class="story-content">{{ feed.content_trimmed|safe }}</div>
+			</div>
+		</div>
+		{% endif %}
+		{% endfor %}
+	</div>
+	<div class="clear-both"></div>
+ 
+	{{ pager|safe }}
+	
+ 
+</div>

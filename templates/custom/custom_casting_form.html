@@ -1,0 +1,187 @@
+<div class="custom-casting-form">
+	<ul class="management-links float-right">
+		{% if form_permissions %}
+		<li>
+			<a href="{{ permissions_url }}" title="Manage Casting Form Permissions">Permissions</a>
+		</li>
+		{% endif %}
+	</ul>
+	<div class="clear-both"></div>
+	{% if submitted %}
+	<div class="form-message"><p>Hvala što ste nas kontaktirali. Vaša poruka će biti razmotrena čim prije.</p></div>
+	{% else %}
+	{% if forbidden %}
+	<div class="form-message"><p>
+		Uslovi za djevojke koje se žele prijaviti za sljedeći izbor za Miss Globe Bosne i Hercegovine:</p>
+		<p>
+			-&nbsp; Da je djevojka starija od 16 i mlađa od 23 godine;<br />
+			-&nbsp; Da je državljanka BiH<br />
+			-&nbsp; Da je viša od 170 cm<br />
+			-&nbsp; Da ima osobnost i ljepotu<br />
+			-&nbsp; Da nije u braku i nema djecu</p>
+		<p>
+			Prijavu za casting možete izvršiti putem web formulara koji će vam biti prikazan u nastavku ove stranice nakon što postanete registrovani korisnik sajta u budete autenticirani.</p>
+		<br />
+	</div>
+	{% else %}
+	<div class="form-message"><p>
+		Uslovi za djevojke koje se žele prijaviti za sljedeći izbor za Miss Globe Bosne i Hercegovine:</p>
+			<p>
+				-&nbsp; Da je djevojka starija od 16 i mlađa od 23 godine;<br />
+				-&nbsp; Da je državljanka BiH<br />
+				-&nbsp; Da je viša od 170 cm<br />
+				-&nbsp; Da ima osobnost i ljepotu<br />
+				-&nbsp; Da nije u braku i nema djecu</p>
+			<p>
+				Prijavu za casting možete izvršiti putem dole prikazanog web formulara.</p>
+			<br />
+	</div>
+	<form action="{{ submit_url }}" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+		<div class="form-fields">
+			<fieldset class="fieldset"><legend>Prebivalište</legend>
+				<div class="field {% if fields.residence_city.required_validate %} required-validate {% endif %}">
+					<label for="residence-city">Grad: <span class="required" title="Ovo polje je obavezno.">*</span></label>
+					<input type="text" maxlength="128" name="residence_city" id="residence-city" size="60" value="{{ fields.residence_city.value }}"/>
+				</div>
+				<div class="field {% if fields.residence_area.required_validate %} required-validate {% endif %}">
+					<label for="residence-area">Regija: <span class="required" title="Ovo polje je obavezno.">*</span></label>
+					<input type="text" maxlength="128" name="residence_area" id="residence-area" size="60" value="{{ fields.residence_area.value }}"/>
+				</div>
+				<div class="field {% if fields.residence_country.required_validate %} required-validate {% endif %}">
+					<label for="residence-country">Zemlja: <span class="required" title="Ovo polje je obavezno.">*</span></label>
+					<input type="text" maxlength="128" name="residence_country" id="residence-country" size="60" value="{{ fields.residence_country.value }}"/>
+				</div>
+			</fieldset>
+			<fieldset class="fieldset"><legend>Lični podaci</legend>
+				<div class="field {% if fields.personal_first_name.required_validate %} required-validate {% endif %}">
+					<label for="personal-first-name">Ime: <span class="required" title="Ovo polje je obavezno.">*</span></label>
+					<input type="text" maxlength="128" name="personal_first_name" id="personal-first-name" size="60" value="{{ fields.personal_first_name.value }}"/>
+				</div>
+				<div class="field {% if fields.personal_last_name.required_validate %} required-validate {% endif %}">
+					<label for="personal-last-name">Prezime: <span class="required" title="Ovo polje je obavezno.">*</span></label>
+					<input type="text" maxlength="128" name="personal_last_name" id="personal-last-name" size="60" value="{{ fields.personal_last_name.value }}"/>
+				</div>
+				<div class="field {% if fields.birth_day.required_validate %} required-validate {% endif %} {% if fields.birth_month.required_validate %} required-validate {% endif %} {% if fields.birth_year.required_validate %} required-validate {% endif %}" id="date-of-birth">
+					<label for="date-of-birth">Datum Rođenja: <span class="required" title="Ovo polje je obavezno.">*</span></label>
+					<select name="birth_day">
+					{% for item in fields.birth_day.items %}
+						<option value="{{ item.value }}" {% if item.selected %} selected="selected" {% endif %}>{{ item.label }}</option>
+					{% endfor %}	
+					</select>
+					<select name="birth_month">
+					{% for item in fields.birth_month.items %}
+						<option value="{{ item.value }}" {% if item.selected %} selected="selected" {% endif %}>{{ item.label }}</option>
+					{% endfor %}	
+					</select>
+					<select name="birth_year">
+					{% for item in fields.birth_year.items %}
+						<option value="{{ item.value }}" {% if item.selected %} selected="selected" {% endif %}>{{ item.label }}</option>
+					{% endfor %}
+					</select>
+				</div>
+				<div class="field {% if fields.birth_city.required_validate %} required-validate {% endif %}">
+					<label for="birth-city">Mjesto rođenja: <span class="required" title="Ovo polje je obavezno.">*</span></label>
+					<input type="text" maxlength="128" name="birth_city" id="birth-city" size="60" value="{{ fields.birth_city.value }}"/>
+				</div>
+				<div class="field {% if fields.birth_country.required_validate %} required-validate {% endif %}">
+					<label for="birth-country">Zemlja rođenja: <span class="required" title="Ovo polje je obavezno.">*</span></label>
+					<input type="text" maxlength="128" name="birth_country" id="birth-country" size="60" value="{{ fields.birth_country.value }}"/>
+				</div>
+				<div class="field {% if fields.citizenship.required_validate %} required-validate {% endif %}">
+					<label for="citizenship">Državljanstvo: <span class="required" title="Ovo polje je obavezno.">*</span></label>
+					<select name="citizenship" id="citizenship" multiple="multiple" size="4">
+					{% for item in fields.citizenship.items %}
+						<option value="{{ item.value }}" {% if item.selected %} selected="selected" {% endif %}>{{ item.label }}</option>
+					{% endfor %}
+					</select> 
+					<span class="description">Držanjem pritisnutog tastera CTRL na tastaturi možete označiti mišem više opcija.</span>
+				</div>
+			</fieldset>
+			<fieldset class="fieldset"><legend>Kontakti</legend>
+				<div class="field {% if fields.contact_phone.required_validate %} required-validate {% endif %}">
+					<label for="contact-phone">Broj mobitela: <span class="required" title="Ovo polje je obavezno.">*</span></label>
+					<input type="text" maxlength="128" name="contact_phone" id="contact-phone" size="60" value="{{ fields.contact_phone.value }}"/>
+					<span class="description">Upišite i nacionalni pozivni broj. Primjer pravilnog formata: +387 (0)61 519 651</span>
+				</div>
+				<div class="field {% if fields.contact_email.required_validate %} required-validate {% endif %}">
+					<label for="contact-email">E-mail: <span class="required" title="Ovo polje je obavezno.">*</span></label>
+					<input type="text" maxlength="128" name="contact_email" id="contact-email" size="60" value="{{ fields.contact_email.value }}" {% if fields.contact_email.readonly %} readonly="readonly" {% endif %}/>
+				</div>
+			</fieldset>
+			<fieldset class="fieldset"><legend>Proporcije</legend>
+				<div class="field {% if fields.body_features_height.required_validate %} required-validate {% endif %}">
+					<label for="body-features-height">Visina: <span class="required" title="Ovo polje je obavezno.">*</span></label>
+					<input type="text" maxlength="128" name="body_features_height" id="body-features-height" size="60" value="{{ fields.body_features_height.value }}"/>
+					<span class="field-suffix">cm</span>
+				</div>
+				<div class="field {% if fields.body_features_bust.required_validate %} required-validate {% endif %}">
+					<label for="body-features-bust">Grudi: <span class="required" title="Ovo polje je obavezno.">*</span></label>
+					<input type="text" maxlength="128" name="body_features_bust" id="body-features-bust" size="60" value="{{ fields.body_features_bust.value }}"/>
+					<span class="field-suffix">cm</span>
+				</div>
+				<div class="field {% if fields.body_features_waist.required_validate %} required-validate {% endif %}">
+					<label for="body-features-waist">Struk: <span class="required" title="Ovo polje je obavezno.">*</span></label>
+					<input type="text" maxlength="128" name="body_features_waist" id="body-features-waist" size="60" value="{{ fields.body_features_waist.value }}"/>
+					<span class="field-suffix">cm</span>
+				</div>
+				<div class="field {% if fields.body_features_hips.required_validate %} required-validate {% endif %}">
+					<label for="body-features-hips">Bokovi: <span class="required" title="Ovo polje je obavezno.">*</span></label>
+					<input type="text" maxlength="128" name="body_features_hips" id="body-features-hips" size="60" value="{{ fields.body_features_hips.value }}"/>
+					<span class="field-suffix">cm</span>
+				</div>
+				<div class="field {% if fields.body_features_weight.required_validate %} required-validate {% endif %}">
+					<label for=""body-features-weight"">Težina: <span class="required" title="Ovo polje je obavezno.">*</span></label>
+					<input type="text" maxlength="128" name="body_features_weight" id="body-features-weight" size="60" value="{{ fields.body_features_weight.value }}"/>
+					<span class="field-suffix">kg</span>
+				</div>
+			</fieldset>
+			<fieldset class="fieldset"><legend>Obrazovanje</legend>
+				<div class="field {% if fields.high_school.required_validate %} required-validate {% endif %}">
+					<label for="high-school">Srednja škola: <span class="required" title="Ovo polje je obavezno.">*</span></label>
+					<input type="text" maxlength="128" name="high_school" id="high-school" size="60" value="{{ fields.high_school.value }}"/>
+				</div>
+				<div class="field {% if fields.university.required_validate %} required-validate {% endif %}">
+					<label for="university">Fakultet: <span class="required" title="Ovo polje je obavezno.">*</span></label>
+					<input type="text" maxlength="128" name="university" id="university" size="60" value="{{ fields.university.value }}"/>
+				</div>
+				<div class="field {% if fields.spoken_languages.required_validate %} required-validate {% endif %}">
+					<label for="spoken-languages">Strani jezici: <span class="required" title="Ovo polje je obavezno.">*</span></label>
+					<input type="text" maxlength="128" name="spoken_languages" id="spoken-languages" size="60" value="{{ fields.spoken_languages.value }}"/>
+					<span class="description">Zarezom odvojite svaki jezik kojeg navodite.</span>
+				</div>
+			</fieldset>
+			<fieldset class="fieldset"><legend>Hobi i talenti</legend>
+				<div class="field {% if fields.hobby.required_validate %} required-validate {% endif %}">
+					<label for="hobby">Koji je Vaš hobi?: <span class="required" title="Ovo polje je obavezno.">*</span></label>
+					<input type="text" maxlength="128" name="hobby" id="hobby" size="60" value="{{ fields.hobby.value }}"/>
+				</div>
+				<div class="field {% if fields.model.required_validate %} required-validate {% endif %}" id="model">
+					<label for="model">Da li se bavite manekenstvom?: <span class="required" title="Ovo polje je obavezno.">*</span></label>
+					{% for item in fields.model.items %}
+					<div class="radio">
+						<label for="model-{{ item.key }}"><input name="model" id="model-{{ item.key }}" type="radio" value="{{ item.value }}" {% if item.checked %} checked="checked" {% endif %}/> {{ item.label }}</label>
+					</div>
+					{% endfor %}
+				</div>
+				<div class="field">
+					<label for="agency">Agencija: </label>
+					<input type="text" maxlength="128" name="agency" id="agency" size="60" value="{{ fields.agency.value }}"/>
+					<span class="description">Upišite ime agencije ukoliko Vas neka zastupa.</span>
+				</div>
+				<div class="field {% if fields.talent.required_validate %} required-validate {% endif %}">
+					<label for="talent">Talenat: <span class="required" title="Ovo polje je obavezno.">*</span></label>
+					<input type="text" maxlength="128" name="talent" id="talent" size="60" value="{{ fields.talent.value }}"/>
+				</div>
+				<div class="field">
+					<label for="note">Komentar: </label>
+					<textarea cols="60" rows="5" name="note" id="note">{{ fields.note.value }}</textarea>
+				</div>
+			</fieldset>
+		</div>
+		<div>
+			<input type="submit" value="Pošalji">
+		</div>
+	</form>
+	{% endif %}
+	{% endif %}
+</div>

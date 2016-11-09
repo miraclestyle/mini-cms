@@ -1,0 +1,16 @@
+<div class="representatives-view">
+	<div class="representatives-list">
+		{% for feed in feeds %}
+		<div class="representative">
+			<a href="{{ feed.view_url }}" title="{{ feed.title_formated }}">
+				<span class="representative-title" title="{{ feed.title_formated }}"><h1>{{ feed.title_trimmed }}</h1></span>
+				{% if feed.cover_src %}
+				<img class="representative-cover" src="{{ feed.cover_src }}" title="{{ feed.title_formated }}" alt="{{ feed.title_formated }}"/>
+				{% endif %}
+			</a>
+		</div>
+		{% endfor %}
+	</div>
+	<div class="clear-both"></div>
+	{{ pager|safe }}
+</div>

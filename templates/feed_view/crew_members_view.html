@@ -1,0 +1,16 @@
+<div class="crew-members-view">
+	<div class="crew-members-list">
+		{% for feed in feeds %}
+		<div class="crew-member">
+			<a href="{{ feed.view_url }}" title="{{ feed.title_formated }}">
+				{% if feed.cover_src %}
+				<img class="crew-member-cover" src="{{ feed.cover_src }}" title="{{ feed.title_formated }}" alt="{{ feed.title_formated }}"/>
+				{% endif %}
+				<span class="crew-member-title" title="{{ feed.title_formated }}"><h1>{{ feed.title_trimmed }}</h1></span>
+			</a>
+		</div>
+		{% endfor %}
+	</div>
+	<div class="clear-both"></div>
+	{{ pager|safe }}
+</div>

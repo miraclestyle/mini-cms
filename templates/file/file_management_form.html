@@ -1,0 +1,86 @@
+<script type="text/javascript">
+$(document).ready(function () { 
+	try {
+		if (top.Elvin.filemanager.instance == true) {
+			
+			if (top.Elvin.filemanager.poptions['ckeditor']) {$('#insertations').remove();}
+	 
+	 
+				for (var rel in top.Elvin.filemanager.selected) {
+				  
+					 $('.file-management-form img[rel='+rel+']').addClass('selected-file');
+			
+    		    
+				}
+	 
+			
+			
+		} else { $('#insertations').remove(); }
+		
+	} catch (e) {
+		
+	}	
+});
+</script>
+
+<div class="file-management-form">
+	<ul class="management-links float-right">
+		{% if file_add %}
+		<li>
+			<a href="{{ add_url }}" title="{{ settings.file_management_form_label_add_title }}">{{ settings.file_management_form_label_add }}</a>
+		</li>
+		{% endif %}
+		{% if file_permissions %}
+		<li>
+			<a href="{{ permissions_url }}" title="{{ settings.file_management_form_label_permissions_title }}">{{ settings.file_management_form_label_permissions }}</a>
+		</li>
+		{% endif %}
+	</ul>
+	<div class="clear-both"></div>
+	<table class="files-grid">
+		<tr>
+			<td>
+				{{ settings.file_management_form_label_title }}
+			</td>
+			<td>
+				{{ settings.file_management_form_label_published }}
+			</td>
+			<td>
+				{{ settings.file_management_form_label_management_links }}
+			</td>
+		</tr>
+		{% for file in files %}
+		<tr data-key="{{ file.key }}" data-src="{{ file.view_url }}" onclick="top.Elvin.filemanager.select(this);" class="list-item">
+			<td class="file-title">
+				<span title="{{ file.title_formated }}">{{ file.title_trimmed }}</span>
+			</td>
+			<td class="file-published">
+				{{ file.published }}
+			</td>
+			<td>
+				<ul class="management-links">
+					<li>
+						<a href="{{ file.view_url }}" title="{{ settings.file_management_form_label_view_title }}">{{ settings.file_management_form_label_view }}</a>
+					</li>	
+					{% if file_edit %}
+					<li>
+						<a href="{{ file.edit_url }}" title="{{ settings.file_management_form_label_edit_title }}">{{ settings.file_management_form_label_edit }}</a>
+					</li>
+					{% endif %}
+					{% if file_delete %}
+					<li>
+						<a href="{{ file.delete_url }}" title="{{ settings.file_management_form_label_delete_title }}">{{ settings.file_management_form_label_delete }}</a>
+					</li>
+					{% endif %}
+				</ul>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+	
+		<div id="insertations">
+			<input type="submit" onclick="top.Elvin.filemanager.insertAll();" value="Insert">
+			<input type="button" name="cancel" value="Cancel" onclick="top.Elvin.filemanager.close()">
+		</div>
+	{{ pager|safe }}
+</div>

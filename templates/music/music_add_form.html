@@ -1,0 +1,15 @@
+<div class="music-add-form">
+	<form action="{{ submit_url }}" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+		<div>{{ settings.music_add_form_label_music }}</div>
+		<div><input type="file" name="music"/></div>
+		<div>{{ settings.music_add_form_label_title }}</div>
+		<div><input type="text" name="title" size="100"/></div>
+		<div>{{ settings.music_add_form_label_content }}</div>
+		<div>{{ content_editor|safe }}</div>
+		<div><input name="published" type="checkbox" value="True" checked="yes" />{{ settings.music_add_form_label_published }}</div>
+		<div>
+			<input type="submit" value="{{ settings.music_add_form_label_submit }}">
+			<input type="button" name="cancel" value="{{ settings.music_add_form_label_cancel }}" onclick="window.location = '{{ cancel_url }}'">
+		</div>
+	</form>
+</div>

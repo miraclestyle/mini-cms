@@ -1,0 +1,93 @@
+<script type="text/javascript">
+$(document).ready(function () { 
+	try {
+		if (top.Elvin.musicmanager.instance == true) {
+			
+			if (top.Elvin.musicmanager.poptions['ckeditor']) {$('#insertations').remove();}
+	 
+	 
+				for (var rel in top.Elvin.musicmanager.selected) {
+				  
+					 $('.musics-grid tr[data-key='+rel+']').addClass('selected-music-file');
+			
+    		    
+				}
+	 
+			
+			
+		} else { $('#insertations').remove(); }
+		
+	} catch (e) {
+		
+	}	
+});
+</script>
+
+<div class="music-management-form">
+	<ul class="management-links float-right">
+		{% if music_add %}
+		<li>
+			<a href="{{ add_url }}" title="{{ settings.music_management_form_label_add_title }}">{{ settings.music_management_form_label_add }}</a>
+		</li>
+		{% endif %}
+		{% if music_permissions %}
+		<li>
+			<a href="{{ permissions_url }}" title="{{ settings.music_management_form_label_permissions_title }}">{{ settings.music_management_form_label_permissions }}</a>
+		</li>
+		{% endif %}
+	</ul>
+	<div class="clear-both"></div>
+	<table class="musics-grid">
+		<tr>
+			<td>
+				{{ settings.music_management_form_label_title }}
+			</td>
+			<td>
+				{{ settings.music_management_form_label_published }}
+			</td>
+			<td>
+				{{ settings.music_management_form_label_file }}
+			</td>
+			<td>
+				{{ settings.music_management_form_label_management_links }}
+			</td>
+		</tr>
+		{% for music in musics %}
+		<tr data-id="{{ music.key.id }}" data-src="{{ music.src }}" data-key="{{ music.key }}" onclick="top.Elvin.musicmanager.select(this);" class="list-item">
+			<td class="music-title">
+				<span title="{{ music.title_formated }}">{{ music.title_trimmed }}</span>
+			</td>
+			<td class="music-published">
+				{{ music.published }}
+			</td>
+			<td class="music-file">
+				<div id="audioplayer-{{ music.key.id }}"><a href="{{ music.src }}" title="{{ music.title_formated }}" alt="{{ music.title_formated }}">{{ music.title_trimmed }}</a></div>
+	<audio src="{{music.src}}" preload="none"></audio> 
+			</td>
+			<td>
+				<ul class="management-links">
+					<li>
+						<a href="{{ music.view_url }}" title="{{ settings.music_management_form_label_view_title }}">{{ settings.music_management_form_label_view }}</a>
+					</li>	
+					{% if music_edit %}
+					<li>
+						<a href="{{ music.edit_url }}" title="{{ settings.music_management_form_label_edit_title }}">{{ settings.music_management_form_label_edit }}</a>
+					</li>
+					{% endif %}
+					{% if music_delete %}
+					<li>
+						<a href="{{ music.delete_url }}" title="{{ settings.music_management_form_label_delete_title }}">{{ settings.music_management_form_label_delete }}</a>
+					</li>
+					{% endif %}
+				</ul>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+	
+		<div id="insertations">
+			<input type="submit" onclick="top.Elvin.musicmanager.insertAll();" value="Insert">
+			<input type="button" name="cancel" value="Cancel" onclick="top.Elvin.musicmanager.close()">
+		</div>
+	{{ pager }}
+</div>

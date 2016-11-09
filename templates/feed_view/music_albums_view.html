@@ -1,0 +1,35 @@
+<script type="text/javascript">
+$(document).ready(function () { 
+	try {
+		AppearanceUtils.hoverInOut('music-album', 'music-album-hover');
+	} catch (e) {
+		
+	}	
+});
+</script>
+
+<div class="music-albums-view">
+	<table class="music-albums-grid">
+		{% for feed in feeds %}
+		{% if forloop.counter0|divisibleby:feeds_per_row %}
+		<tr>
+		{% endif %}
+			<td>
+				<div class="music-album" id="music-album-{{ feed.key.id }}" onclick="window.location = '{{ feed.view_url }}'" title="{{ feed.title_formated }}">
+					<div class="music-album-title"><h3>{{ feed.title_trimmed }}</h3></div>
+					<div class="clear-both"></div>
+					{% if feed.cover_src %}
+					<div class="music-album-cover" >
+						<img src="{{ feed.cover_src }}" title="{{ feed.title_formated }}" alt="{{ feed.title_formated }}"/>
+					</div>
+					{% endif %}
+				</div>
+			</td>
+		{% if forloop.counter|divisibleby:feeds_per_row or forloop.last %}
+		</tr>
+		{% endif %}
+		{% endfor %}
+	</table>
+	{{ pager|safe }}
+</div>
+

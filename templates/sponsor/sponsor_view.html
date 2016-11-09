@@ -1,0 +1,15 @@
+<div class="sponsor-view">
+	<div><h1>{{ sponsor.title_formated }}</h1></div>
+	<div>{{ settings.sponsor_view_label_url }}</div>
+	<div>{{ sponsor.url_formated }}</div>
+	<div>{{ settings.sponsor_view_label_probability }}</div>
+	<div>{{ probability.label }}</div>
+	{% if sponsor_logo_src %}
+	<div>{{ settings.sponsor_view_label_logo }}</div>
+	<div><img src="{{ sponsor_logo_src }}" title="{{ sponsor.title_formated }}" alt="{{ sponsor.title_formated }}"/></div>
+	{% endif %}
+	<div>{{ settings.sponsor_view_label_clicks }}</div>
+	<div>{{ clicks }}</div>
+	<div>{{ settings.sponsor_view_label_impressions }}</div>
+	<div>{{ impressions }}</div>
+</div>

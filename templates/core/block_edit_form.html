@@ -1,0 +1,28 @@
+<div class="block-edit-form">
+	<form action="{{ submit_url }}" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+		<div>{{ settings.block_edit_form_label_title }}</div>
+		<div><input type="text" name="title" value="{{ block.title_formated }}" size="100"/></div>
+		<div>{{ settings.block_edit_form_label_position }}</div>
+		<div>
+			<select name="position">
+				{% for position in positions %}
+				<option value="{{ position.value }}" {% if position.selected %} selected="selected" {% endif %} >{{ position.label }}</option>
+				{% endfor %}
+			</select>
+		</div>
+		<div>{{ settings.block_edit_form_label_weight }}</div>
+		<div>
+			<select name="weight">
+				{% for weight in weights %}
+				<option value="{{ weight.value }}" {% if weight.selected %} selected="selected" {% endif %} >{{ weight.value }}</option>
+				{% endfor %}
+			</select>
+		</div>
+		<div>{{ settings.block_edit_form_label_content }}</div><div>{{ content_editor|safe }}</div>
+		<div><input name="published" type="checkbox" value="True" {% if block.published %} checked="checked" {% endif %} />{{ settings.block_edit_form_label_published }}</div>
+		<div>
+			<input type="submit" value="{{ settings.block_edit_form_label_submit }}">
+			<input type="button" name="cancel" value="{{ settings.block_edit_form_label_cancel }}" onclick="window.location = '{{ cancel_url }}'">
+		</div>
+	</form>
+</div>

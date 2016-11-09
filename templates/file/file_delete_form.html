@@ -1,0 +1,10 @@
+<div class="file-delete-form">
+	<form action="{{ submit_url }}" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+		<h1>{{ delete_question }}</h1>
+		<div><a href="{{ src }}" title="{{ file.title_formated }}" alt="{{ file.title_formated }}">{{ file.title_trimmed }}</a></div>
+		<div>
+			<input type="submit" value="{{ settings.file_delete_form_label_submit }}">
+			<input type="button" name="cancel" value="{{ settings.file_delete_form_label_cancel }}" onclick="window.location = '{{ cancel_url }}'">
+		</div>
+	</form>
+</div>

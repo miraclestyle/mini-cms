@@ -1,0 +1,60 @@
+<div class="story-view">
+	<div class="story-title">
+		<h1>{{ feed.title_formated }}</h1>
+	</div>
+ 
+	<div class="clear-both"></div>
+	<div class="story-content">
+		{{ feed.content_formated|safe }}
+	</div>
+	{% if photos %}
+	<div class="story-photos">
+		<table class="photos-grid">
+			{% for photo in photos %}
+			{% if forloop.counter0|divisibleby:photos_per_row %}
+			<tr>
+			{% endif %}
+				<td>
+					<div class="photo">
+						<a fb-like-url="http://www.{{ settings.site_domain }}{{ photo.like_url }}" href="{{ photo.view_url }}" class="render-image-fancybox fancybox" rel="photos">
+							<img src="{{ photo.src }}" title="{{ photo.description_formated }}" alt="{{ photo.description_formated }}"/>
+						</a>
+					</div>
+				</td>
+			{% if forloop.counter|divisibleby:photos_per_row or forloop.last %}
+			</tr>
+			{% endif %}
+			{% endfor %}
+		</table>
+	</div>
+	{% endif %}
+	{{ photos_pager|safe }}
+	{% if musics %}
+	<div class="story-musics">
+		{% for music in musics %}
+			<div class="music-title" id="music-title-{{ music.key.id }}" show-hide-id="{{ music.key.id }}">
+				<div>
+					<div class="music-player">
+						<div id="audioplayer-{{ music.key.id }}"><a href="{{ music.src }}" title="{{ music.title_formated }}" alt="{{ music.title_formated }}">{{ music.title_trimmed }}</a></div>
+                        <audio src="{{music.src}}" preload="none"></audio> 
+ 
+					</div>
+					<div class="music-link">
+						<a href="{{ music.view_url }}" title="More Information">››</a>
+					</div>
+				</div>
+				<div class="clear-both"></div>
+				<div class="music-content" style="display:none;" id="music-content-{{ music.key.id }}">
+					{{ feed.content_formated|safe }}
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	{% endif %}
+	{{ musics_pager|safe }}
+	<div id="story-fb-like">
+		<div id="story-fb-like-inner">
+			<fb:like href="http://www.{{ settings.site_domain }}{{ like_url }}" show_faces="true" width="450" colorscheme="dark">
+		</div>
+	</div>
+</div>

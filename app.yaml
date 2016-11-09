@@ -1,0 +1,89 @@
+application: hrd-emir-frozencamels-com
+version: 7
+runtime: python27
+api_version: 1
+threadsafe: no
+
+handlers:
+
+- url: /favicon.ico
+  static_files: static/images/favicon.ico
+  upload: static/images/favicon.ico
+  expiration: "364d 5h"
+  
+- url: /robots.txt
+  static_files: static/robots.txt
+  upload: static/robots.txt
+  expiration: "1d 5h"
+
+- url: /static
+  static_dir: static
+  expiration: "364d 5h"
+
+- url: /error/.*
+  script: core.app
+
+- url: /user/.*
+  script: core.app
+
+- url: /block/.*
+  script: core.app
+
+- url: /file/.*
+  script: file.app
+  
+- url: /track/.*
+  script: music.app
+
+- url: /photo/.*
+  script: photo.app
+  
+- url: /feed/.*
+  script: feed.app
+
+- url: /photos
+  script: feed.app
+
+- url: /gallery/.*
+  script: feed.app
+  
+- url: /music
+  script: feed.app
+  
+- url: /album/.*
+  script: feed.app
+  
+- url: /news
+  script: feed.app
+    
+- url: /story/.*
+  script: feed.app
+  
+- url: /frequently-asked-questions
+  script: feed.app
+  
+- url: /frequently-asked-question/.*
+  script: feed.app
+  
+- url: /page/.*
+  script: feed.app
+  
+#- url: /contact
+#  script: custom_mailer.app
+    
+- url: /contact/permissions
+  script: custom_mailer.app
+  
+- url: /
+  script: feed.app
+
+- url: /.*
+  script: feed.app
+  
+- url: .*
+  script: core.app
+
+libraries:
+
+- name: django
+  version: 1.2

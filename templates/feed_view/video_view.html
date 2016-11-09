@@ -1,0 +1,14 @@
+<div class="video-view">
+	<div class="video-title">
+		<h1>{{ feed.title_formated }}</h1>
+	</div>
+	<div class="clear-both"></div>
+	<div class="video-content">
+		{{ feed.content_formated|safe }}
+	</div>
+	<div id="video-fb-like">
+		<div id="video-fb-like-inner">
+			<fb:like href="http://www.{{ settings.site_domain }}{{ like_url }}" show_faces="true" width="450" colorscheme="dark">
+		</div>
+	</div>
+</div>

@@ -1,0 +1,11 @@
+<div class="music-delete-form">
+	<form action="{{ submit_url }}" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+		<h1>{{ delete_question }}</h1>
+		<div id="audioplayer-{{ music.key.id }}"><a href="{{ src }}" title="{{ music.title_formated }}" alt="{{ music.title_formated }}">{{ music.title_trimmed }}</a></div>
+		<audio src="{{music.src}}" preload="none"></audio> 
+		<div>
+			<input type="submit" value="{{ settings.music_delete_form_label_submit }}">
+			<input type="button" name="cancel" value="{{ settings.music_delete_form_label_cancel }}" onclick="window.location = '{{ cancel_url }}'">
+		</div>
+	</form>
+</div>

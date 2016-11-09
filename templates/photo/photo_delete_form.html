@@ -1,0 +1,11 @@
+<div class="photo-delete-form">
+	<form action="{{ submit_url }}" method="POST" enctype="multipart/form-data" accept-charset="UTF-8">
+		<h1>{{ delete_question }}</h1>
+		<div><img src="{{ src }}" title="{{ photo.description_formated }}" alt="{{ photo.description_formated }}"/></div>
+		<div>{{ photo.description_formated }}</div>
+		<div>
+			<input type="submit" value="{{ settings.photo_delete_form_label_submit }}">
+			<input type="button" name="cancel" value="{{ settings.photo_delete_form_label_cancel }}" onclick="window.location = '{{ cancel_url }}'">
+		</div>
+	</form>
+</div>
